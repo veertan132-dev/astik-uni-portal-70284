@@ -1,8 +1,8 @@
-import { Users, Briefcase, Trophy, Building2, TrendingUp, Clock, FileCheck, Calendar } from "lucide-react";
+import { Users, Briefcase, Trophy, Building2, TrendingUp, Clock, FileCheck, Calendar, ArrowUp, Sparkles, Award, UserCheck, Target } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Area, AreaChart } from "recharts";
 
 const DashboardHome = () => {
   const stats = [
@@ -10,46 +10,57 @@ const DashboardHome = () => {
       title: "Total Students",
       value: "36,847",
       icon: Users,
-      trend: "+12% vs last year",
+      trend: "+12%",
+      trendText: "vs last year",
       subtitle: "14 hours ago",
-      color: "bg-blue-500/10 text-blue-600",
+      color: "from-blue-500 to-blue-600",
+      bgColor: "bg-blue-500/10",
+      iconColor: "text-blue-600",
+      badge: null,
     },
     {
       title: "Active Jobs",
       value: "47",
       icon: Briefcase,
-      trend: "+2 expiring soon",
-      subtitle: "+5 pending month",
-      color: "bg-orange-500/10 text-orange-600",
+      trend: "+5",
+      trendText: "pending month",
+      subtitle: "+2 expiring soon",
+      color: "from-orange-500 to-orange-600",
+      bgColor: "bg-orange-500/10",
+      iconColor: "text-orange-600",
+      badge: null,
     },
     {
       title: "Students Placed",
       value: "722",
       icon: Trophy,
-      trend: "+8% vs pooling month",
+      trend: "+8%",
+      trendText: "vs pooling month",
       subtitle: "placement rate (2024-25)",
-      color: "bg-primary/10 text-primary",
-      badge: "5 new today",
+      color: "from-primary to-teal-light",
+      bgColor: "bg-primary/10",
+      iconColor: "text-primary",
+      badge: "5",
     },
   ];
 
   const placementData = [
-    { dept: "CS", placements: 250 },
-    { dept: "Mech", placements: 150 },
-    { dept: "ECE", placements: 200 },
-    { dept: "Civil", placements: 112 },
-    { dept: "Bio", placements: 100 },
+    { dept: "CS", placements: 250, target: 280 },
+    { dept: "Mech", placements: 150, target: 180 },
+    { dept: "ECE", placements: 200, target: 220 },
+    { dept: "Civil", placements: 112, target: 140 },
+    { dept: "Bio", placements: 100, target: 120 },
   ];
 
   const trendData = [
-    { month: "Jan", rate: 65 },
-    { month: "Feb", rate: 68 },
-    { month: "Mar", rate: 72 },
-    { month: "Apr", rate: 75 },
-    { month: "May", rate: 78 },
-    { month: "Jun", rate: 82 },
-    { month: "Jul", rate: 85 },
-    { month: "Aug", rate: 88 },
+    { month: "Jan", rate: 65, applications: 820 },
+    { month: "Feb", rate: 68, applications: 890 },
+    { month: "Mar", rate: 72, applications: 950 },
+    { month: "Apr", rate: 75, applications: 1020 },
+    { month: "May", rate: 78, applications: 1100 },
+    { month: "Jun", rate: 82, applications: 1180 },
+    { month: "Jul", rate: 85, applications: 1250 },
+    { month: "Aug", rate: 88, applications: 1320 },
   ];
 
   const statusData = [
@@ -58,118 +69,159 @@ const DashboardHome = () => {
   ];
 
   const recentApplications = [
-    { name: "Priya Sharma", role: "Apfitware Engineer at Goosoft", time: "2 hours ago", status: "New" },
-    { name: "Anjali Singh", role: "Applied to Data Analyst at Microsoft", time: "4 hours ago", status: "Reviewed" },
-    { name: "Kartik Bose", role: "Financial Analyst at PWC", time: "day ago", status: "New" },
-    { name: "Neha Gupta", role: "Product Manager at Flipk|k", time: "day ago", status: "Review" },
+    { name: "Priya Sharma", role: "Software Engineer at Google", time: "2 hours ago", status: "New", color: "bg-primary" },
+    { name: "Anjali Singh", role: "Data Analyst at Microsoft", time: "4 hours ago", status: "Reviewed", color: "bg-blue-600" },
+    { name: "Kartik Bose", role: "Financial Analyst at PWC", time: "1 day ago", status: "New", color: "bg-primary" },
+    { name: "Neha Gupta", role: "Product Manager at Flipkart", time: "1 day ago", status: "Review", color: "bg-orange-600" },
   ];
 
   return (
-    <div className="space-y-6">
-      {/* Greeting */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            Good Morning, Dr. Kumar 👋
-          </h1>
-          <p className="text-muted-foreground mt-1">Saturday, October 18, 2025</p>
+    <div className="space-y-8">
+      {/* Greeting Section with Gradient Background */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-teal-light to-blue-600 p-8 text-white shadow-premium">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        <div className="relative z-10 flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold flex items-center gap-3 mb-2">
+              Good Morning, Dr. Kumar 
+              <span className="text-5xl">👋</span>
+            </h1>
+            <p className="text-white/90 text-lg">Saturday, October 18, 2025</p>
+          </div>
+          <div className="hidden md:flex items-center gap-4">
+            <div className="text-right">
+              <p className="text-sm text-white/80">Overall Progress</p>
+              <p className="text-3xl font-bold">+12%</p>
+            </div>
+            <Sparkles className="w-12 h-12 text-yellow-300" />
+          </div>
         </div>
       </div>
 
-      {/* Quick Stats */}
+      {/* Enhanced Stats Cards */}
       <div>
-        <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+          <Target className="w-6 h-6 text-primary" />
+          Quick Actions
+        </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <Card key={index} className="p-6 hover:shadow-premium transition-smooth">
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`w-12 h-12 rounded-xl ${stat.color} flex items-center justify-center`}>
-                    <Icon className="w-6 h-6" />
+              <Card 
+                key={index} 
+                className="relative overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-0"
+              >
+                {/* Gradient Background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5`}></div>
+                
+                <div className="relative p-6">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className={`w-14 h-14 rounded-2xl ${stat.bgColor} flex items-center justify-center shadow-lg`}>
+                      <Icon className={`w-7 h-7 ${stat.iconColor}`} />
+                    </div>
+                    {stat.badge && (
+                      <div className="flex items-center gap-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                        <Sparkles className="w-3 h-3" />
+                        {stat.badge} new today
+                      </div>
+                    )}
                   </div>
-                  {stat.badge && (
-                    <span className="bg-destructive text-destructive-foreground text-xs font-semibold px-2 py-1 rounded-full">
-                      {stat.badge}
-                    </span>
+                  
+                  <div className="space-y-3">
+                    <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
+                    <p className="text-4xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                      {stat.value}
+                    </p>
+                    
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-primary/10">
+                        <ArrowUp className="w-4 h-4 text-primary" />
+                        <span className="text-sm font-bold text-primary">{stat.trend}</span>
+                      </div>
+                      <span className="text-sm text-muted-foreground">{stat.trendText}</span>
+                    </div>
+                    
+                    <p className="text-xs text-muted-foreground">{stat.subtitle}</p>
+                  </div>
+                  
+                  {index === 2 && (
+                    <Button size="sm" className="mt-4 w-full bg-gradient-to-r from-primary to-teal-light hover:shadow-lg transition-all">
+                      Review Details →
+                    </Button>
                   )}
                 </div>
-                <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">{stat.title}</p>
-                  <p className="text-3xl font-bold">{stat.value}</p>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-primary font-medium">{stat.trend}</span>
-                    {index === 0 && <TrendingUp className="w-4 h-4 text-primary" />}
-                  </div>
-                  <p className="text-xs text-muted-foreground">{stat.subtitle}</p>
-                </div>
-                {index === 2 && (
-                  <Button size="sm" className="mt-4 w-full bg-primary hover:bg-primary/90">
-                    Review →
-                  </Button>
-                )}
               </Card>
             );
           })}
         </div>
       </div>
 
-      {/* Action Cards */}
+      {/* Action Cards with Modern Design */}
       <div className="grid md:grid-cols-3 gap-6">
-        <Card className="p-6 border-2 border-primary/20">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold mb-1">Post New Job</h3>
-              <p className="text-sm text-muted-foreground mb-3">Job Ready Students</p>
-              <div className="text-2xl font-bold mb-1">53.5%</div>
-              <p className="text-xs text-muted-foreground mb-3">13 Issues agy</p>
-              <Button size="sm" variant="outline" className="text-primary border-primary hover:bg-primary hover:text-white">
-                Review →
-              </Button>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 border-2 border-primary/20">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <FileCheck className="w-6 h-6 text-primary" />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-1">
-                <h3 className="font-semibold">Review</h3>
-                <span className="bg-destructive text-destructive-foreground text-xs font-semibold px-2 py-1 rounded-full">
-                  23
-                </span>
+        <Card className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-2 border-primary/20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
+          <div className="relative p-6">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-teal-light flex items-center justify-center shadow-lg">
+                <Award className="w-7 h-7 text-white" />
               </div>
-              <p className="text-sm text-muted-foreground mb-3">Applications</p>
-              <h4 className="font-semibold mb-1">Update Students</h4>
-              <p className="text-sm text-muted-foreground mb-3">Manage student profiles</p>
-              <Button size="sm" variant="outline" className="text-primary border-primary hover:bg-primary hover:text-white">
-                Review →
-              </Button>
+              <div className="flex-1">
+                <h3 className="font-bold text-lg mb-1">Post New Job</h3>
+                <p className="text-sm text-muted-foreground mb-3">Job Ready Students</p>
+                <div className="text-3xl font-bold mb-1 bg-gradient-to-r from-primary to-teal-light bg-clip-text text-transparent">53.5%</div>
+                <p className="text-xs text-muted-foreground mb-4">13 Issues ago</p>
+                <Button size="sm" className="bg-gradient-to-r from-primary to-teal-light hover:shadow-lg transition-all">
+                  Review →
+                </Button>
+              </div>
             </div>
           </div>
         </Card>
 
-        <Card className="p-6 border-2 border-primary/20">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Calendar className="w-6 h-6 text-primary" />
+        <Card className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-2 border-blue-500/20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent"></div>
+          <div className="relative p-6">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+                <FileCheck className="w-7 h-7 text-white" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="font-bold text-lg">Review</h3>
+                  <span className="bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                    <Sparkles className="w-3 h-3" />
+                    23
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">Applications</p>
+                <h4 className="font-semibold mb-1">Update Students</h4>
+                <p className="text-sm text-muted-foreground mb-4">Manage student profiles</p>
+                <Button size="sm" className="bg-gradient-to-r from-blue-500 to-blue-600 hover:shadow-lg transition-all">
+                  Review →
+                </Button>
+              </div>
             </div>
-            <div className="flex-1">
-              <h3 className="font-semibold mb-1">Schedule</h3>
-              <p className="text-sm text-muted-foreground mb-3">Destinitites - Microsoft</p>
-              <h4 className="font-semibold mb-1">Schedule Interviews</h4>
-              <p className="text-sm text-muted-foreground mb-3">View detailed partners</p>
-              <Button size="sm" variant="outline" className="text-primary border-primary hover:bg-primary hover:text-white">
-                Review →
-              </Button>
+          </div>
+        </Card>
+
+        <Card className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-2 border-orange-500/20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent"></div>
+          <div className="relative p-6">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
+                <Calendar className="w-7 h-7 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-lg mb-1">Schedule</h3>
+                <p className="text-sm text-muted-foreground mb-3">Destinities - Microsoft</p>
+                <h4 className="font-semibold mb-1">Schedule Interviews</h4>
+                <p className="text-sm text-muted-foreground mb-4">View detailed partners</p>
+                <Button size="sm" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:shadow-lg transition-all">
+                  Review →
+                </Button>
+              </div>
             </div>
           </div>
         </Card>
@@ -179,56 +231,107 @@ const DashboardHome = () => {
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Charts */}
         <div className="lg:col-span-2 space-y-6">
-          <Card className="p-6">
-            <h3 className="font-semibold mb-4">Placements by Department (Year 2024)</h3>
-            <ResponsiveContainer width="100%" height={250}>
+          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-0">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-primary" />
+                Placements by Department
+              </h3>
+              <span className="text-sm text-muted-foreground">Year 2024</span>
+            </div>
+            <ResponsiveContainer width="100%" height={280}>
               <BarChart data={placementData}>
+                <defs>
+                  <linearGradient id="colorBar" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#1AB394" stopOpacity={1}/>
+                    <stop offset="100%" stopColor="#1AB394" stopOpacity={0.6}/>
+                  </linearGradient>
+                </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
                 <XAxis dataKey="dept" stroke="#6B7280" />
                 <YAxis stroke="#6B7280" />
-                <Tooltip />
-                <Bar dataKey="placements" fill="#1AB394" radius={[8, 8, 0, 0]} />
+                <Tooltip 
+                  contentStyle={{ 
+                    borderRadius: '12px', 
+                    border: 'none', 
+                    boxShadow: '0 10px 40px -10px rgba(0,0,0,0.2)' 
+                  }}
+                />
+                <Bar dataKey="placements" fill="url(#colorBar)" radius={[12, 12, 0, 0]} />
+                <Bar dataKey="target" fill="#E5E7EB" radius={[12, 12, 0, 0]} opacity={0.3} />
               </BarChart>
             </ResponsiveContainer>
           </Card>
 
-          <Card className="p-6">
-            <h3 className="font-semibold mb-4">Placement Rate Trend (Last 8 Months)</h3>
-            <ResponsiveContainer width="100%" height={200}>
-              <LineChart data={trendData}>
+          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-0">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <Award className="w-5 h-5 text-blue-600" />
+                Placement Rate Trend
+              </h3>
+              <span className="text-sm text-muted-foreground">Last 8 Months</span>
+            </div>
+            <ResponsiveContainer width="100%" height={240}>
+              <AreaChart data={trendData}>
+                <defs>
+                  <linearGradient id="colorArea" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#1AB394" stopOpacity={0.4}/>
+                    <stop offset="100%" stopColor="#1AB394" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
                 <XAxis dataKey="month" stroke="#6B7280" />
                 <YAxis stroke="#6B7280" />
-                <Tooltip />
-                <Line type="monotone" dataKey="rate" stroke="#1AB394" strokeWidth={3} dot={{ fill: "#1AB394", r: 4 }} />
-              </LineChart>
+                <Tooltip 
+                  contentStyle={{ 
+                    borderRadius: '12px', 
+                    border: 'none', 
+                    boxShadow: '0 10px 40px -10px rgba(0,0,0,0.2)' 
+                  }}
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="rate" 
+                  stroke="#1AB394" 
+                  strokeWidth={3}
+                  fill="url(#colorArea)"
+                />
+              </AreaChart>
             </ResponsiveContainer>
           </Card>
         </div>
 
         {/* Recent Activity */}
         <div className="space-y-6">
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold">Recent Applications</h3>
-              <span className="text-xs text-muted-foreground">22.28M ADility</span>
+          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-0">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-bold flex items-center gap-2">
+                <UserCheck className="w-5 h-5 text-primary" />
+                Recent Applications
+              </h3>
+              <span className="text-xs text-muted-foreground">22.28M Ability</span>
             </div>
             <div className="space-y-3">
               {recentApplications.map((app, index) => (
-                <div key={index} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-smooth">
-                  <Avatar className="w-10 h-10">
-                    <AvatarFallback className="bg-primary text-white text-sm">
+                <div 
+                  key={index} 
+                  className="group flex items-start gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-primary/5 hover:to-transparent transition-all cursor-pointer border border-transparent hover:border-primary/20"
+                >
+                  <Avatar className="w-12 h-12 ring-2 ring-primary/20">
+                    <AvatarFallback className={`bg-gradient-to-br ${app.color} text-white text-sm font-bold`}>
                       {app.name.split(" ").map((n) => n[0]).join("")}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-sm">{app.name}</h4>
+                    <h4 className="font-semibold text-sm group-hover:text-primary transition-colors">{app.name}</h4>
                     <p className="text-xs text-muted-foreground truncate">{app.role}</p>
-                    <div className="flex items-center gap-2 mt-1">
+                    <div className="flex items-center gap-2 mt-2">
                       <Clock className="w-3 h-3 text-muted-foreground" />
                       <span className="text-xs text-muted-foreground">{app.time}</span>
-                      <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
-                        app.status === "New" ? "bg-primary text-white" : "bg-muted text-muted-foreground"
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                        app.status === "New" 
+                          ? "bg-gradient-to-r from-primary to-teal-light text-white" 
+                          : "bg-muted text-muted-foreground"
                       }`}>
                         {app.status}
                       </span>
@@ -239,36 +342,44 @@ const DashboardHome = () => {
             </div>
           </Card>
 
-          <Card className="p-6">
-            <h3 className="font-semibold mb-4">Today's Interviews</h3>
+          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-0 bg-gradient-to-br from-primary/5 to-transparent">
+            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-primary" />
+              Today's Interviews
+            </h3>
             <div className="space-y-4">
-              <div className="p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-2xl font-bold">10:00 AM</span>
-                  <span className="text-xs text-muted-foreground">Oct 18</span>
-                </div>
-                <p className="text-sm text-muted-foreground mb-2">45 mins</p>
-                <div className="flex items-center gap-3 mb-3">
-                  <Avatar className="w-10 h-10">
-                    <AvatarFallback className="bg-primary text-white">RV</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h4 className="font-semibold text-sm">Rahul Verma</h4>
-                    <p className="text-xs text-muted-foreground">Data Analyst = Microsoft</p>
+              <div className="relative overflow-hidden p-5 border-2 border-primary/30 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent hover:shadow-lg transition-all">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-3xl font-bold text-primary">10:00 AM</span>
+                    <span className="text-xs text-muted-foreground bg-background px-2 py-1 rounded-full">Oct 18</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">45 mins</p>
+                  <div className="flex items-center gap-3 mb-4">
+                    <Avatar className="w-12 h-12 ring-2 ring-primary/30">
+                      <AvatarFallback className="bg-gradient-to-br from-primary to-teal-light text-white font-bold">RV</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-bold text-sm">Rahul Verma</h4>
+                      <p className="text-xs text-muted-foreground">Data Analyst • Microsoft</p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <Building2 className="w-6 h-6 text-primary" />
+              
+              <div className="p-5 border-2 border-primary/30 rounded-2xl bg-gradient-to-br from-blue-500/5 to-transparent hover:shadow-lg transition-all">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+                    <Building2 className="w-7 h-7 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-sm">Add Company</h4>
-                    <p className="text-xs text-muted-foreground">Vista Comyllstnet = Analytics</p>
+                    <h4 className="font-bold text-sm">Add Company</h4>
+                    <p className="text-xs text-muted-foreground">Vista Comylstnet • Analytics</p>
                   </div>
                 </div>
-                <Button size="sm" className="w-full bg-primary hover:bg-primary/90">
+                <Button size="sm" className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:shadow-lg transition-all">
+                  <Calendar className="w-4 h-4 mr-2" />
                   Join Video Call
                 </Button>
               </div>
