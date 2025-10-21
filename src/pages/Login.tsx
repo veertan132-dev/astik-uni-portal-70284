@@ -16,9 +16,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex overflow-hidden">
       {/* Left Panel - Dark */}
-      <div className="hidden lg:flex lg:w-1/2 gradient-navy p-12 flex-col justify-between text-white relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 gradient-navy p-8 xl:p-12 flex-col justify-between text-white relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 right-20 w-64 h-64 border-2 border-white/20 rounded-full"></div>
@@ -81,8 +81,8 @@ const Login = () => {
       </div>
 
       {/* Right Panel - Login Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-background">
-        <div className="w-full max-w-md">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-8 bg-background overflow-y-auto">
+        <div className="w-full max-w-md py-4">
           <div className="mb-8 lg:hidden">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">

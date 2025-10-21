@@ -14,10 +14,12 @@ import {
   X,
   Building,
   CheckCircle,
+  ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 
 const DashboardLayout = () => {
   const location = useLocation();
@@ -108,36 +110,13 @@ const DashboardLayout = () => {
               );
             })}
           </nav>
-
-          {/* User Profile & Logout */}
-          <div className="p-4 border-t border-white/10">
-            <div className="flex items-center gap-3 p-3 bg-white/10 rounded-lg mb-3">
-              <Avatar className="w-10 h-10">
-                <AvatarFallback className="bg-primary text-white">
-                  RK
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1 min-w-0">
-                <h4 className="font-semibold text-sm truncate">Dr. Rajesh Kumar</h4>
-                <p className="text-xs text-gray-300 truncate">Placement Officer</p>
-              </div>
-            </div>
-            <Button
-              variant="ghost"
-              className="w-full justify-start gap-3 text-gray-300 hover:bg-white/10 hover:text-white"
-              onClick={handleLogout}
-            >
-              <LogOut className="w-5 h-5" />
-              <span>Logout</span>
-            </Button>
-          </div>
         </div>
       </aside>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header */}
-        <header className="sticky top-0 z-30 bg-background border-b px-6 py-4">
+        <header className="sticky top-0 z-30 bg-background border-b px-6 py-4 shadow-sm">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4 flex-1">
               <button
@@ -170,11 +149,43 @@ const DashboardLayout = () => {
               <button className="p-2 hover:bg-muted rounded-lg transition-smooth">
                 <HelpCircle className="w-5 h-5" />
               </button>
-              <Avatar className="w-9 h-9 cursor-pointer">
-                <AvatarFallback className="bg-primary text-white text-sm">
-                  RK
-                </AvatarFallback>
-              </Avatar>
+              
+              {/* User Profile Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex items-center gap-2 hover:bg-muted rounded-lg p-2 transition-smooth">
+                    <Avatar className="w-9 h-9 ring-2 ring-primary/20">
+                      <AvatarFallback className="bg-gradient-to-br from-primary to-teal-light text-white text-sm font-bold">
+                        RK
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="hidden md:block text-left">
+                      <p className="text-sm font-semibold">Dr. Rajesh Kumar</p>
+                      <p className="text-xs text-muted-foreground">Placement Officer</p>
+                    </div>
+                    <ChevronDown className="w-4 h-4 text-muted-foreground hidden md:block" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-card border shadow-lg z-50">
+                  <div className="px-3 py-2 border-b">
+                    <p className="text-sm font-semibold">Dr. Rajesh Kumar</p>
+                    <p className="text-xs text-muted-foreground">placement.officer@iitb.ac.in</p>
+                  </div>
+                  <DropdownMenuItem onClick={() => navigate("/dashboard/settings")}>
+                    <Settings className="w-4 h-4 mr-2" />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <HelpCircle className="w-4 h-4 mr-2" />
+                    Help & Support
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </header>
