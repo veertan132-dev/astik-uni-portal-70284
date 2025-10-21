@@ -1,120 +1,189 @@
-import { ReactNode } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation, useNavigate, Outlet } from "react-router-dom";
 import {
   Users,
+  LayoutDashboard,
   Briefcase,
-  BarChart3,
-  Calendar,
-  MessageSquare,
+  UserCog,
   Settings,
   LogOut,
-  Home,
-  UserCog,
-  CheckCircle2,
+  Bell,
+  HelpCircle,
+  Search,
+  Menu,
+  X,
+  Building,
+  CheckCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
-interface DashboardLayoutProps {
-  children: ReactNode;
-}
-
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const DashboardLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const menuItems = [
-    { icon: Home, label: "Dashboard", path: "/dashboard" },
-    { icon: Users, label: "Students", path: "/dashboard/students" },
-    { icon: Briefcase, label: "Job Postings", path: "/dashboard/jobs" },
-    { icon: UserCog, label: "User Management", path: "/dashboard/users" },
-    { icon: Settings, label: "Settings", path: "/dashboard/settings" },
+  const navigation = [
+    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+    { name: "Students", href: "/dashboard/students", icon: Users },
+    { name: "Job Listings", href: "/dashboard/jobs", icon: Briefcase },
+    { name: "User Management", href: "/dashboard/users", icon: UserCog },
+    { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
+
+  const isActive = (path: string) => location.pathname === path;
 
   const handleLogout = () => {
     navigate("/login");
   };
 
   return (
-    <div className="min-h-screen flex bg-background">
+    <div className="min-h-screen flex w-full bg-background">
+      {/* Mobile Sidebar Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-navy text-white flex flex-col">
-        <div className="p-6 border-b border-navy-light">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-              <Users className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-lg font-bold">astikLearn</h1>
-              <p className="text-xs text-primary">for Universities</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 bg-navy-light rounded-lg p-3">
-            <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-sm font-semibold">
-              IT
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="font-medium text-sm truncate">IIT Bombay</div>
-              <div className="flex items-center gap-1 text-xs text-primary">
-                <span>Verified</span>
-                <CheckCircle2 className="w-3 h-3" />
+      <aside
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 gradient-navy text-white transform transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+      >
+        <div className="flex flex-col h-full">
+          {/* Logo & College Info */}
+          <div className="p-6 border-b border-white/10">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Users className="w-6 h-6 text-primary" />
+                <div>
+                  <h1 className="text-lg font-bold">astikLearn</h1>
+                  <p className="text-xs text-primary">for Universities</p>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <nav className="flex-1 p-4 space-y-1">
-          {menuItems.map((item) => {
-            const isActive = location.pathname === item.path;
-            const Icon = item.icon;
-            
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={cn(
-                  "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-                  isActive
-                    ? "bg-primary text-white"
-                    : "text-gray-300 hover:bg-navy-light hover:text-white"
-                )}
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="lg:hidden text-white"
               >
-                <Icon className="w-5 h-5" />
-                <span className="text-sm font-medium">{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="p-4 border-t border-navy-light">
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-gray-300 hover:text-white hover:bg-navy-light"
-            onClick={handleLogout}
-          >
-            <LogOut className="w-5 h-5 mr-3" />
-            Logout
-          </Button>
-
-          <div className="mt-4 p-3 bg-navy-light rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
-                <span className="text-xs font-bold">RK</span>
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="flex items-center gap-3 mt-4 p-3 bg-white/10 rounded-lg">
+              <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center">
+                <Building className="w-6 h-6 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-xs font-medium truncate">Dr. Rajesh Kumar</div>
-                <div className="text-xs text-gray-400">Placement Officer</div>
+                <h3 className="font-semibold text-sm truncate">IIT Bombay</h3>
+                <div className="flex items-center gap-1 text-xs text-gray-300">
+                  <CheckCircle className="w-3 h-3 text-primary" />
+                  <span>Verified</span>
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex-1 p-4 space-y-1">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setSidebarOpen(false)}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-smooth ${
+                    active
+                      ? "bg-primary text-white"
+                      : "text-gray-300 hover:bg-white/10"
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="font-medium">{item.name}</span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* User Profile & Logout */}
+          <div className="p-4 border-t border-white/10">
+            <div className="flex items-center gap-3 p-3 bg-white/10 rounded-lg mb-3">
+              <Avatar className="w-10 h-10">
+                <AvatarFallback className="bg-primary text-white">
+                  RK
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1 min-w-0">
+                <h4 className="font-semibold text-sm truncate">Dr. Rajesh Kumar</h4>
+                <p className="text-xs text-gray-300 truncate">Placement Officer</p>
+              </div>
+            </div>
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-3 text-gray-300 hover:bg-white/10 hover:text-white"
+              onClick={handleLogout}
+            >
+              <LogOut className="w-5 h-5" />
+              <span>Logout</span>
+            </Button>
           </div>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        {children}
-      </main>
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Top Header */}
+        <header className="sticky top-0 z-30 bg-background border-b px-6 py-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4 flex-1">
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="lg:hidden text-foreground"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Search students, jobs, companies..."
+                  className="pl-11 pr-4"
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-primary text-primary hover:bg-primary hover:text-white hidden sm:flex"
+              >
+                View All →
+              </Button>
+              <button className="relative p-2 hover:bg-muted rounded-lg transition-smooth">
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
+              </button>
+              <button className="p-2 hover:bg-muted rounded-lg transition-smooth">
+                <HelpCircle className="w-5 h-5" />
+              </button>
+              <Avatar className="w-9 h-9 cursor-pointer">
+                <AvatarFallback className="bg-primary text-white text-sm">
+                  RK
+                </AvatarFallback>
+              </Avatar>
+            </div>
+          </div>
+        </header>
+
+        {/* Page Content */}
+        <main className="flex-1 p-6 overflow-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

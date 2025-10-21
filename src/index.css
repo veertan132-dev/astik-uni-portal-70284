@@ -8,94 +8,73 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 214 40% 15%;
+    --background: 220 17% 97%;
+    --foreground: 215 25% 27%;
 
     --card: 0 0% 100%;
-    --card-foreground: 214 40% 15%;
+    --card-foreground: 215 25% 27%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 214 40% 15%;
+    --popover-foreground: 215 25% 27%;
 
-    --primary: 174 73% 41%;
+    --primary: 174 65% 41%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 214 40% 15%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 215 25% 27%;
 
-    --muted: 210 40% 96%;
+    --muted: 210 40% 96.1%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 174 73% 41%;
+    --accent: 174 65% 41%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-
-    --success: 142 76% 36%;
-    --success-foreground: 0 0% 100%;
-
-    --warning: 45 93% 47%;
-    --warning-foreground: 0 0% 100%;
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 174 73% 41%;
+    --ring: 174 65% 41%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 214 40% 15%;
+    --sidebar-background: 215 28% 17%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 174 73% 41%;
+    --sidebar-primary: 174 65% 41%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 214 35% 20%;
+    --sidebar-accent: 215 25% 22%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 214 35% 20%;
-    --sidebar-ring: 174 73% 41%;
+    --sidebar-border: 215 25% 22%;
+    --sidebar-ring: 174 65% 41%;
 
-    --navy: 214 40% 15%;
-    --navy-light: 214 35% 25%;
-    --teal: 174 73% 41%;
-    --teal-light: 174 73% 50%;
+    --navy-dark: 215 28% 17%;
+    --navy-darker: 217 33% 12%;
+    --teal-primary: 174 65% 41%;
+    --teal-light: 174 65% 50%;
+    --success: 142 71% 45%;
+    --warning: 45 93% 47%;
   }
 
   .dark {
-    --background: 214 40% 10%;
+    --background: 215 28% 17%;
     --foreground: 210 40% 98%;
-
-    --card: 214 40% 15%;
+    --card: 215 25% 22%;
     --card-foreground: 210 40% 98%;
-
-    --popover: 214 40% 15%;
+    --popover: 215 25% 22%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 174 73% 41%;
+    --primary: 174 65% 41%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 214 35% 20%;
+    --secondary: 217 32% 17%;
     --secondary-foreground: 210 40% 98%;
-
-    --muted: 214 35% 20%;
+    --muted: 217 32% 17%;
     --muted-foreground: 215 20% 65%;
-
-    --accent: 174 73% 41%;
+    --accent: 174 65% 41%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 214 35% 20%;
-    --input: 214 35% 20%;
-    --ring: 174 73% 41%;
-
-    --sidebar-background: 214 40% 15%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 174 73% 41%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 214 35% 20%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 214 35% 20%;
-    --sidebar-ring: 174 73% 41%;
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 174 65% 41%;
   }
 }
 
@@ -106,5 +85,28 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-navy {
+    background: linear-gradient(135deg, hsl(var(--navy-darker)), hsl(var(--navy-dark)));
+  }
+
+  .gradient-teal {
+    background: linear-gradient(135deg, hsl(var(--teal-primary)), hsl(var(--teal-light)));
+  }
+
+  .shadow-premium {
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
