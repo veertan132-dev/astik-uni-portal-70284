@@ -158,9 +158,9 @@ const Jobs = () => {
 
       {/* Stats Cards */}
       <div className="grid md:grid-cols-3 gap-6">
-        <Card className="p-6 border-2 border-primary/20 hover:shadow-lg transition-all">
+        <Card className="p-6 border-2 border-primary/30 hover:shadow-2xl hover:border-primary/50 transition-all hover:-translate-y-1">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center border border-primary/20">
               <Briefcase className="w-6 h-6 text-primary" />
             </div>
             <div>
@@ -170,9 +170,9 @@ const Jobs = () => {
             </div>
           </div>
         </Card>
-        <Card className="p-6 border-2 border-orange-500/20 hover:shadow-lg transition-all">
+        <Card className="p-6 border-2 border-orange-500/30 hover:shadow-2xl hover:border-orange-500/50 transition-all hover:-translate-y-1">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-500/10 flex items-center justify-center border border-orange-500/20">
               <Users className="w-6 h-6 text-orange-600" />
             </div>
             <div>
@@ -182,9 +182,9 @@ const Jobs = () => {
             </div>
           </div>
         </Card>
-        <Card className="p-6 border-2 border-red-500/20 hover:shadow-lg transition-all">
+        <Card className="p-6 border-2 border-red-500/30 hover:shadow-2xl hover:border-red-500/50 transition-all hover:-translate-y-1">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-red-500/10 flex items-center justify-center border border-red-500/20">
               <Calendar className="w-6 h-6 text-red-600" />
             </div>
             <div>
@@ -215,15 +215,14 @@ const Jobs = () => {
               {filteredJobs.map((job) => (
                 <tr key={job.id} className="hover:bg-muted/50 transition-smooth">
                   <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center">
                       {job.logo ? (
-                        <img src={job.logo} alt={job.company} className="h-8 object-contain" />
+                        <img src={job.logo} alt={job.company} className="h-10 object-contain" />
                       ) : (
-                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                          <Building2 className="w-5 h-5 text-primary" />
+                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center border-2 border-primary/20">
+                          <Building2 className="w-6 h-6 text-primary" />
                         </div>
                       )}
-                      <span className="font-semibold">{job.company}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
