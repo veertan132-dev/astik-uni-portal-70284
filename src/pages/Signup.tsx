@@ -203,40 +203,6 @@ const Signup = () => {
                     />
                   </div>
                 </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
-                  <div className="relative">
-                    <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" strokeWidth="2"/>
-                      <path d="M7 11V7a5 5 0 0 1 10 0v4" strokeWidth="2"/>
-                    </svg>
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="Create strong password"
-                      className="pl-11"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="confirm-password">Confirm Password</Label>
-                  <div className="relative">
-                    <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" strokeWidth="2"/>
-                      <path d="M7 11V7a5 5 0 0 1 10 0v4" strokeWidth="2"/>
-                    </svg>
-                    <Input
-                      id="confirm-password"
-                      type="password"
-                      placeholder="Confirm password"
-                      className="pl-11"
-                      required
-                    />
-                  </div>
-                </div>
               </div>
             </div>
 

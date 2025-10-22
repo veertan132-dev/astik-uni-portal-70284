@@ -1,8 +1,8 @@
-import { Users, Briefcase, Trophy, Building2, TrendingUp, Clock, FileCheck, Calendar, ArrowUp, Sparkles, Award, UserCheck, Target } from "lucide-react";
+import { Users, Briefcase, Trophy, TrendingUp, Award, Target, ArrowUp, Sparkles, UserCheck, Clock, FileCheck, Calendar } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Area, AreaChart } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const DashboardHome = () => {
   const stats = [
@@ -52,22 +52,6 @@ const DashboardHome = () => {
     { dept: "Bio", placements: 100, target: 120 },
   ];
 
-  const trendData = [
-    { month: "Jan", rate: 65, applications: 820 },
-    { month: "Feb", rate: 68, applications: 890 },
-    { month: "Mar", rate: 72, applications: 950 },
-    { month: "Apr", rate: 75, applications: 1020 },
-    { month: "May", rate: 78, applications: 1100 },
-    { month: "Jun", rate: 82, applications: 1180 },
-    { month: "Jul", rate: 85, applications: 1250 },
-    { month: "Aug", rate: 88, applications: 1320 },
-  ];
-
-  const statusData = [
-    { name: "Placed", value: 722, color: "#1AB394" },
-    { name: "Unplaced", value: 442, color: "#E5E7EB" },
-  ];
-
   const recentApplications = [
     { name: "Priya Sharma", role: "Software Engineer at Google", time: "2 hours ago", status: "New", color: "bg-primary" },
     { name: "Anjali Singh", role: "Data Analyst at Microsoft", time: "4 hours ago", status: "Reviewed", color: "bg-blue-600" },
@@ -99,11 +83,11 @@ const DashboardHome = () => {
         </div>
       </div>
 
-      {/* Enhanced Stats Cards */}
+      {/* Enhanced Stats Cards with Borders */}
       <div>
         <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
           <Target className="w-6 h-6 text-primary" />
-          Quick Actions
+          Quick Overview
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {stats.map((stat, index) => {
@@ -111,7 +95,7 @@ const DashboardHome = () => {
             return (
               <Card 
                 key={index} 
-                className="relative overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-0"
+                className="relative overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-2 border-primary/20"
               >
                 {/* Gradient Background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5`}></div>
@@ -229,9 +213,9 @@ const DashboardHome = () => {
 
       {/* Charts & Activity */}
       <div className="grid lg:grid-cols-3 gap-6">
-        {/* Charts */}
+        {/* Chart */}
         <div className="lg:col-span-2 space-y-6">
-          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-0">
+          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-2 border-primary/20">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-primary" />
@@ -239,7 +223,7 @@ const DashboardHome = () => {
               </h3>
               <span className="text-sm text-muted-foreground">Year 2024</span>
             </div>
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={300}>
               <BarChart data={placementData}>
                 <defs>
                   <linearGradient id="colorBar" x1="0" y1="0" x2="0" y2="1">
@@ -262,48 +246,11 @@ const DashboardHome = () => {
               </BarChart>
             </ResponsiveContainer>
           </Card>
-
-          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-0">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold flex items-center gap-2">
-                <Award className="w-5 h-5 text-blue-600" />
-                Placement Rate Trend
-              </h3>
-              <span className="text-sm text-muted-foreground">Last 8 Months</span>
-            </div>
-            <ResponsiveContainer width="100%" height={240}>
-              <AreaChart data={trendData}>
-                <defs>
-                  <linearGradient id="colorArea" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#1AB394" stopOpacity={0.4}/>
-                    <stop offset="100%" stopColor="#1AB394" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                <XAxis dataKey="month" stroke="#6B7280" />
-                <YAxis stroke="#6B7280" />
-                <Tooltip 
-                  contentStyle={{ 
-                    borderRadius: '12px', 
-                    border: 'none', 
-                    boxShadow: '0 10px 40px -10px rgba(0,0,0,0.2)' 
-                  }}
-                />
-                <Area 
-                  type="monotone" 
-                  dataKey="rate" 
-                  stroke="#1AB394" 
-                  strokeWidth={3}
-                  fill="url(#colorArea)"
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </Card>
         </div>
 
         {/* Recent Activity */}
         <div className="space-y-6">
-          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-0">
+          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-2 border-primary/20">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-bold flex items-center gap-2">
                 <UserCheck className="w-5 h-5 text-primary" />
@@ -339,50 +286,6 @@ const DashboardHome = () => {
                   </div>
                 </div>
               ))}
-            </div>
-          </Card>
-
-          <Card className="p-6 shadow-premium hover:shadow-2xl transition-all border-0 bg-gradient-to-br from-primary/5 to-transparent">
-            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-primary" />
-              Today's Interviews
-            </h3>
-            <div className="space-y-4">
-              <div className="relative overflow-hidden p-5 border-2 border-primary/30 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent hover:shadow-lg transition-all">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-3xl font-bold text-primary">10:00 AM</span>
-                    <span className="text-xs text-muted-foreground bg-background px-2 py-1 rounded-full">Oct 18</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-4">45 mins</p>
-                  <div className="flex items-center gap-3 mb-4">
-                    <Avatar className="w-12 h-12 ring-2 ring-primary/30">
-                      <AvatarFallback className="bg-gradient-to-br from-primary to-teal-light text-white font-bold">RV</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h4 className="font-bold text-sm">Rahul Verma</h4>
-                      <p className="text-xs text-muted-foreground">Data Analyst • Microsoft</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-5 border-2 border-primary/30 rounded-2xl bg-gradient-to-br from-blue-500/5 to-transparent hover:shadow-lg transition-all">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
-                    <Building2 className="w-7 h-7 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-sm">Add Company</h4>
-                    <p className="text-xs text-muted-foreground">Vista Comylstnet • Analytics</p>
-                  </div>
-                </div>
-                <Button size="sm" className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:shadow-lg transition-all">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Join Video Call
-                </Button>
-              </div>
             </div>
           </Card>
         </div>
